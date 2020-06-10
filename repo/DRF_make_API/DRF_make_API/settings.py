@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'snippets.apps.SnippetsConfig',
     'rest_framework.authtoken',
+    'django_filters',
+
 ]
 
 MIDDLEWARE = [
@@ -124,8 +126,9 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
-    'PAGE_SIZE': 1,
+    # 'PAGE_SIZE': 1,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
+
 }

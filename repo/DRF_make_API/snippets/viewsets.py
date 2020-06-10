@@ -9,7 +9,9 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
+from django_filters import rest_framework as filters
 
+from .filters import SnippetFilter
 
 
 # class SnippetViewSet(viewsets.ViewSet):
@@ -57,8 +59,10 @@ from rest_framework.authtoken.models import Token
 class SnippetViewSet(viewsets.ModelViewSet):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['id', 'title', 'code', 'linenos', 'language', 'style']
+    # filter_backends = [filters.SearchFilter]
+    # search_fields = ['id', 'title', 'code', 'linenos', 'language', 'style']
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = SnippetFilter
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
